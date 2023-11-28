@@ -27,4 +27,30 @@ export class CountriesService {
       )
   }
 
+  searchByCountry(term: string): Observable<Country[]> {
+    const countryUrl = `${this.apiUrl}/name/${term}`;
+    return this.httpClient.get<Country[]>(countryUrl)
+      .pipe(
+        // tap(countries => console.log(countries)),
+        // map((countries) => [])
+        catchError((err) => {
+          console.log('Error:', err);
+          return of([])
+        })
+      )
+  }
+
+  searchByRegion(term: string): Observable<Country[]> {
+    const regionUrl = `${this.apiUrl}/region/${term}`;
+    return this.httpClient.get<Country[]>(regionUrl)
+      .pipe(
+        // tap(countries => console.log(countries)),
+        // map((countries) => [])
+        catchError((err) => {
+          console.log('Error:', err);
+          return of([])
+        })
+      )
+  }
+
 }
