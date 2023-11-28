@@ -2,5 +2,7 @@
   type="text"
   class="form-control"
   [placeholder]="placeholder"
+  #seachInput
+  (keyup.enter)="onEnter(seachInput.value)"
 />
 <hr>
