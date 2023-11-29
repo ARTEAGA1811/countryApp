@@ -53,4 +53,23 @@ export class CountriesService {
       )
   }
 
+  searchByCode(code: string): Observable<Country | null> {
+    const codeUrl = `${this.apiUrl}/alpha/${code}`;
+    return this.httpClient.get<Country[]>(codeUrl)
+      .pipe(
+        map((countries) => {
+          if (countries.length > 0) {
+            return countries[0]
+          }
+          return null
+        }),
+        // tap(countries => console.log(countries)),
+        // map((countries) => [])
+        catchError((err) => {
+          console.log('Error:', err);
+          return of(null)
+        })
+      )
+  }
+
 }
